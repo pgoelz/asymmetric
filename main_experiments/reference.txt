@@ -1,0 +1,41 @@
+Using license file /Users/pgoelz/gurobi.lic
+Academic license - for non-commercial use only
+
+Start computing multipliers for the five beta distributions.
+experiments.py:185: IntegrationWarning: The occurrence of roundoff error is detected, which prevents
+  the requested tolerance from being achieved.  The error may be
+  underestimated.
+  prob = integrate.quad(local_eval, dist.min, dist.max)[0]
+Computed multipliers [1.0, 0.8339729309082031, 2.0838546752929688, 1.2098731994628906, 2.0375137329101562] in 2477 seconds.
+Reference output: [1.0, 0.8339729309082031, 2.0838546752929688, 1.2098731994628906, 2.0375137329101562]
+
+Start main experiment (Figure 4).
+m =  5
+m =  10
+m =  20
+m =  50
+m =  100
+m =  200
+m =  500
+m =  1000
+m =  2000
+m =  5000
+m =  10000
+Completed main experiment in 31911 seconds.
+Wrote output to fig4.csv and fig4.pdf.
+
+Start experiment with offset values of m (Figure 5).
+m =  8
+m =  13
+m =  23
+m =  53
+m =  103
+m =  203
+m =  503
+m =  1003
+Completed offset experiment in 7426 seconds.
+Wrote output to fig5.csv and fig5.pdf.
+
+Starting experiment where five agents all have distribution Beta(5, 1).
+Finished symmetric experiment in 7427 seconds.
+Result: At m=1000, the welfare-maximizing algorithm is envy free with probability ~65.80% (95% confidence interval: [0.6281750655004318, 0.6869118294593697])

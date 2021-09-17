@@ -1,0 +1,434 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     16744,        426]
+NotebookOptionsPosition[     14332,        385]
+NotebookOutlinePosition[     14748,        403]
+CellTagsIndexPosition[     14705,        400]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+Define the 5 functions, chosen to match \
+https://en.wikipedia.org/wiki/Beta_distribution#/media/File:Beta_distribution_\
+pdf.svg . Note that the labeling in this code (a, b, c, d, e) does not \
+coincide with the labeling in Figure 1 (A, B, C, D, E). The correct mapping \
+is given as comments in the code:\
+\>", "Text",
+ CellChangeTimes->{{3.839882499308323*^9, 3.839882503538715*^9}, {
+  3.83988253862993*^9, 3.839882542787799*^9}, {3.840223639958206*^9, 
+  3.840223676487382*^9}, {3.8402237828393393`*^9, 
+  3.840223803221704*^9}},ExpressionUUID->"4a2d635a-e7a0-4724-9d99-\
+e667491f3cdf"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"fa", "=", 
+   RowBox[{"BetaDistribution", "[", 
+    RowBox[{
+     RowBox[{"1", "/", "2"}], ",", 
+     RowBox[{"1", "/", "2"}]}], "]"}]}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"A", " ", "in", " ", 
+    RowBox[{"Fig", ".", " ", "1"}]}], " ", "*)"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fb", "=", 
+   RowBox[{"BetaDistribution", "[", 
+    RowBox[{"5", ",", "1"}], "]"}]}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"E", " ", "in", " ", 
+    RowBox[{"Fig", ".", " ", "1"}]}], " ", "*)"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fc", "=", 
+   RowBox[{"BetaDistribution", "[", 
+    RowBox[{"1", ",", "3"}], "]"}]}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"B", " ", "in", " ", 
+    RowBox[{"Fig", ".", " ", "1"}]}], " ", "*)"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fd", "=", 
+   RowBox[{"BetaDistribution", "[", 
+    RowBox[{"2", ",", "2"}], "]"}]}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"D", " ", "in", " ", 
+    RowBox[{"Fig", ".", " ", "1"}]}], " ", "*)"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fe", "=", 
+   RowBox[{"BetaDistribution", "[", 
+    RowBox[{"2", ",", "5"}], "]"}]}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"C", " ", "in", " ", 
+    RowBox[{"Fig", ".", " ", "1"}]}], " ", "*)"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.839881835956086*^9, 3.8398818413760977`*^9}, {
+  3.840223804972746*^9, 3.84022380902671*^9}, {3.840223842121792*^9, 
+  3.840223909224422*^9}, {3.8402239683456907`*^9, 3.840223980109417*^9}, {
+  3.840224031212926*^9, 3.84022411364081*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"0aaa62be-e8b9-42e7-b752-f0783ede879c"],
+
+Cell["\<\
+The following function takes in a sequence of (distribution, multiplier) \
+pairs. It then computes the probability that the largest scaled utility drawn \
+comes from the first given distribution.\
+\>", "Text",
+ CellChangeTimes->{{3.8398825816090384`*^9, 3.839882627263015*^9}, {
+  3.840224138676362*^9, 
+  3.8402241395589857`*^9}},ExpressionUUID->"343b5439-7844-46e6-81f1-\
+9ebcb127705a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"probmax", "[", 
+   RowBox[{
+   "dist1_", ",", "m1_", ",", "dist2_", ",", "m2_", ",", "dist3_", ",", "m3_",
+     ",", "dist4_", ",", "m4_", ",", "dist5_", ",", "m5_"}], "]"}], ":=", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"PDF", "[", 
+      RowBox[{"dist1", ",", "x"}], "]"}], "*", 
+     RowBox[{"CDF", "[", 
+      RowBox[{"dist2", ",", 
+       RowBox[{
+        RowBox[{"m1", "/", "m2"}], "*", "x"}]}], "]"}], "*", 
+     RowBox[{"CDF", "[", 
+      RowBox[{"dist3", ",", 
+       RowBox[{
+        RowBox[{"m1", "/", "m3"}], "*", "x"}]}], "]"}], "*", 
+     RowBox[{"CDF", "[", 
+      RowBox[{"dist4", ",", 
+       RowBox[{
+        RowBox[{"m1", "/", "m4"}], "*", "x"}]}], "]"}], "*", 
+     RowBox[{"CDF", "[", 
+      RowBox[{"dist5", ",", 
+       RowBox[{
+        RowBox[{"m1", "/", "m5"}], "*", "x"}]}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0", ",", "1"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.839881782964818*^9, 3.839881929345948*^9}},
+ CellLabel->"In[6]:=",ExpressionUUID->"b33f4ae1-53e7-41e9-b169-f4decbdb97da"],
+
+Cell["\<\
+The next function takes in input as above, but computes the expected utility \
+conditional on the agent having the largest scaled utility.\
+\>", "Text",
+ CellChangeTimes->{{3.839882637388679*^9, 
+  3.839882673855193*^9}},ExpressionUUID->"59c86cd8-f71b-461b-80f9-\
+fdc804cc9727"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"condexputil", "[", 
+   RowBox[{
+   "dist1_", ",", "m1_", ",", "dist2_", ",", "m2_", ",", "dist3_", ",", "m3_",
+     ",", "dist4_", ",", "m4_", ",", "dist5_", ",", "m5_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"Integrate", "[", 
+    RowBox[{
+     RowBox[{"x", "*", 
+      RowBox[{"PDF", "[", 
+       RowBox[{"dist1", ",", "x"}], "]"}], "*", 
+      RowBox[{"CDF", "[", 
+       RowBox[{"dist2", ",", 
+        RowBox[{
+         RowBox[{"m1", "/", "m2"}], "*", "x"}]}], "]"}], "*", 
+      RowBox[{"CDF", "[", 
+       RowBox[{"dist3", ",", 
+        RowBox[{
+         RowBox[{"m1", "/", "m3"}], "*", "x"}]}], "]"}], "*", 
+      RowBox[{"CDF", "[", 
+       RowBox[{"dist4", ",", 
+        RowBox[{
+         RowBox[{"m1", "/", "m4"}], "*", "x"}]}], "]"}], "*", 
+      RowBox[{"CDF", "[", 
+       RowBox[{"dist5", ",", 
+        RowBox[{
+         RowBox[{"m1", "/", "m5"}], "*", "x"}]}], "]"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "1"}], "}"}]}], "]"}], "/", 
+   RowBox[{"probmax", "[", 
+    RowBox[{
+    "dist1", ",", "m1", ",", "dist2", ",", "m2", ",", "dist3", ",", "m3", ",",
+      "dist4", ",", "m4", ",", "dist5", ",", "m5"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.83988197537481*^9, 3.839882027480901*^9}},
+ CellLabel->"In[7]:=",ExpressionUUID->"1ee081a3-8417-4e10-aa8e-8f2a9fd67f7c"],
+
+Cell["\<\
+Multipliers generated in Python to equalize the probabilities:\
+\>", "Text",
+ CellChangeTimes->{{3.839882057405548*^9, 
+  3.839882071586774*^9}},ExpressionUUID->"0fa139dd-6e4a-42de-9426-\
+d65329b98db1"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ma", "=", 
+   RowBox[{"Rationalize", "[", 
+    RowBox[{"1.", ",", "0"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"mb", "=", 
+   RowBox[{"Rationalize", "[", 
+    RowBox[{"0.8339729309082031", ",", "0"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"mc", "=", 
+   RowBox[{"Rationalize", "[", 
+    RowBox[{"2.0838546752929688", ",", "0"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"md", "=", 
+   RowBox[{"Rationalize", "[", 
+    RowBox[{"1.2098731994628906", ",", "0"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"me", "=", 
+   RowBox[{"Rationalize", "[", 
+    RowBox[{"2.0375137329101562", ",", "0"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.839882076244329*^9, 3.8398821469909687`*^9}},
+ CellLabel->"In[8]:=",ExpressionUUID->"cbd82af5-86dd-4b22-b812-deb33b4a2a6f"],
+
+Cell["\<\
+Using these multipliers, measure how far the probabilities of each agent \
+having the largest scaled utility deviate from the optimal point of 1/5, \
+which is always at most 2*10^-6.\
+\>", "Text",
+ CellChangeTimes->{{3.8398823246522818`*^9, 3.839882382711076*^9}, {
+  3.83988244668046*^9, 
+  3.839882481391932*^9}},ExpressionUUID->"1ef09f64-f0d5-4e17-8053-\
+888445623c43"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"N", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"probmax", "[", 
+     RowBox[{
+     "fa", ",", "ma", ",", "fb", ",", "mb", ",", "fc", ",", "mc", ",", "fd", 
+      ",", "md", ",", "fe", ",", "me"}], "]"}], "-", 
+    RowBox[{"1", "/", "5"}]}], ",", "20"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"probmax", "[", 
+     RowBox[{
+     "fb", ",", "mb", ",", "fa", ",", "ma", ",", "fc", ",", "mc", ",", "fd", 
+      ",", "md", ",", "fe", ",", "me"}], "]"}], "-", 
+    RowBox[{"1", "/", "5"}]}], ",", "20"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"probmax", "[", 
+     RowBox[{
+     "fc", ",", "mc", ",", "fb", ",", "mb", ",", "fa", ",", "ma", ",", "fd", 
+      ",", "md", ",", "fe", ",", "me"}], "]"}], "-", 
+    RowBox[{"1", "/", "5"}]}], ",", "20"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"probmax", "[", 
+     RowBox[{
+     "fd", ",", "md", ",", "fb", ",", "mb", ",", "fc", ",", "mc", ",", "fa", 
+      ",", "ma", ",", "fe", ",", "me"}], "]"}], "-", 
+    RowBox[{"1", "/", "5"}]}], ",", "20"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"probmax", "[", 
+     RowBox[{
+     "fe", ",", "me", ",", "fb", ",", "mb", ",", "fc", ",", "mc", ",", "fd", 
+      ",", "md", ",", "fa", ",", "ma"}], "]"}], "-", 
+    RowBox[{"1", "/", "5"}]}], ",", "20"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.839882153248556*^9, 3.839882293276238*^9}},
+ CellLabel->"In[13]:=",ExpressionUUID->"6dcb4d54-b970-473d-9106-8100f18c46e0"],
+
+Cell[BoxData["1.99261784715383693828346794277413`20.*^-6"], "Output",
+ CellChangeTimes->{{3.8398821823267527`*^9, 3.839882231419106*^9}, 
+   3.839882265842208*^9, 3.839882303347704*^9, 3.840224363383223*^9, 
+   3.840224626700922*^9},
+ CellLabel->"Out[13]=",ExpressionUUID->"6c375add-5dc6-43cc-8370-0a22106c0642"],
+
+Cell[BoxData[
+ RowBox[{"-", "1.90758982727847696135763867117015`20.*^-6"}]], "Output",
+ CellChangeTimes->{{3.8398821823267527`*^9, 3.839882231419106*^9}, 
+   3.839882265842208*^9, 3.839882303347704*^9, 3.840224363383223*^9, 
+   3.8402246313636007`*^9},
+ CellLabel->"Out[14]=",ExpressionUUID->"65fe3689-aaa6-45da-97a6-f66640ae299a"],
+
+Cell[BoxData["2.387043194910910635134556976443`20.*^-8"], "Output",
+ CellChangeTimes->{{3.8398821823267527`*^9, 3.839882231419106*^9}, 
+   3.839882265842208*^9, 3.839882303347704*^9, 3.840224363383223*^9, 
+   3.840224649622786*^9},
+ CellLabel->"Out[15]=",ExpressionUUID->"9ddc4af9-ebbd-4837-8352-2a1319bf19bc"],
+
+Cell[BoxData["1.15303674641210096037946887174434`20.*^-6"], "Output",
+ CellChangeTimes->{{3.8398821823267527`*^9, 3.839882231419106*^9}, 
+   3.839882265842208*^9, 3.839882303347704*^9, 3.840224363383223*^9, 
+   3.840224677451913*^9},
+ CellLabel->"Out[16]=",ExpressionUUID->"89987f86-2c2c-4a54-ace8-0e08319a2abc"],
+
+Cell[BoxData[
+ RowBox[{"-", "1.26193519823657004365664371311275`20.*^-6"}]], "Output",
+ CellChangeTimes->{{3.8398821823267527`*^9, 3.839882231419106*^9}, 
+   3.839882265842208*^9, 3.839882303347704*^9, 3.840224363383223*^9, 
+   3.84022470929099*^9},
+ CellLabel->"Out[17]=",ExpressionUUID->"311cb5ca-7c45-4186-9e2a-9146adbbd40c"]
+}, Open  ]],
+
+Cell["\<\
+Finally, we check the difference between the expected utility of agent i for \
+an item conditioned on i receiving the item and i\[CloseCurlyQuote]s expected \
+utility for an item without conditioning. This difference is much smaller for \
+the agent with distribution fb, labeled E in the paper.\
+\>", "Text",
+ CellChangeTimes->{{3.84022355843006*^9, 3.840223578732162*^9}, {
+  3.840224208342297*^9, 
+  3.840224288496524*^9}},ExpressionUUID->"1aecc06b-e3f1-4476-a2df-\
+fb9832d01e6a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"N", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"condexputil", "[", 
+     RowBox[{
+     "fa", ",", "ma", ",", "fb", ",", "mb", ",", "fc", ",", "mc", ",", "fd", 
+      ",", "md", ",", "fe", ",", "me"}], "]"}], "-", 
+    RowBox[{"Expectation", "[", 
+     RowBox[{"x", ",", 
+      RowBox[{"x", "\[Distributed]", "fa"}]}], "]"}]}], ",", "20"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"condexputil", "[", 
+     RowBox[{
+     "fb", ",", "mb", ",", "fa", ",", "ma", ",", "fc", ",", "mc", ",", "fd", 
+      ",", "md", ",", "fe", ",", "me"}], "]"}], "-", 
+    RowBox[{"Expectation", "[", 
+     RowBox[{"x", ",", 
+      RowBox[{"x", "\[Distributed]", "fb"}]}], "]"}]}], ",", "20"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"condexputil", "[", 
+     RowBox[{
+     "fc", ",", "mc", ",", "fb", ",", "mb", ",", "fa", ",", "ma", ",", "fd", 
+      ",", "md", ",", "fe", ",", "me"}], "]"}], "-", 
+    RowBox[{"Expectation", "[", 
+     RowBox[{"x", ",", 
+      RowBox[{"x", "\[Distributed]", "fc"}]}], "]"}]}], ",", "20"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"condexputil", "[", 
+     RowBox[{
+     "fd", ",", "md", ",", "fb", ",", "mb", ",", "fc", ",", "mc", ",", "fa", 
+      ",", "ma", ",", "fe", ",", "me"}], "]"}], "-", 
+    RowBox[{"Expectation", "[", 
+     RowBox[{"x", ",", 
+      RowBox[{"x", "\[Distributed]", "fd"}]}], "]"}]}], ",", "20"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"condexputil", "[", 
+     RowBox[{
+     "fe", ",", "me", ",", "fb", ",", "mb", ",", "fc", ",", "mc", ",", "fd", 
+      ",", "md", ",", "fa", ",", "ma"}], "]"}], "-", 
+    RowBox[{"Expectation", "[", 
+     RowBox[{"x", ",", 
+      RowBox[{"x", "\[Distributed]", "fe"}]}], "]"}]}], ",", "20"}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.839882811559394*^9, 3.8398828209983883`*^9}, {
+  3.83988287988391*^9, 3.839882931358005*^9}},
+ CellLabel->"In[18]:=",ExpressionUUID->"e0b46379-eb2b-4bd6-9a00-4bd4d6cad67f"],
+
+Cell[BoxData["0.41627014764957458443907147698458868503`20."], "Output",
+ CellChangeTimes->{3.840224733342669*^9},
+ CellLabel->"Out[18]=",ExpressionUUID->"f7dad74b-0cc1-4d9e-a07e-8bc4a0a43c0f"],
+
+Cell[BoxData["0.06471689252825807256569945958618137397`20."], "Output",
+ CellChangeTimes->{3.840224742243178*^9},
+ CellLabel->"Out[19]=",ExpressionUUID->"2a277f4e-e0ab-4bc4-9ee9-e7323a56f51f"],
+
+Cell[BoxData["0.29611394460090903177252461878785621432`20."], "Output",
+ CellChangeTimes->{3.8402247818235893`*^9},
+ CellLabel->"Out[20]=",ExpressionUUID->"eeca4a81-508c-4a2a-b193-d49ac26738ec"],
+
+Cell[BoxData["0.26294068032548731606173014765769266071`20."], "Output",
+ CellChangeTimes->{3.840224811761314*^9},
+ CellLabel->"Out[21]=",ExpressionUUID->"91021856-b996-481c-8cb5-57485525ebb7"],
+
+Cell[BoxData["0.22236473132350756366943672621319912991`20."], "Output",
+ CellChangeTimes->{3.84022484900156*^9},
+ CellLabel->"Out[22]=",ExpressionUUID->"0bdd87be-7b1c-4a00-b3a4-fd10678829de"]
+}, Open  ]]
+},
+WindowSize->{808, 755},
+WindowMargins->{{Automatic, 186}, {-14, Automatic}},
+PrintingCopies->1,
+PrintingPageRange->{1, Automatic},
+CellContext->Notebook,
+FrontEndVersion->"12.0 for Mac OS X x86 (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 601, 11, 104, "Text",ExpressionUUID->"4a2d635a-e7a0-4724-9d99-e667491f3cdf"],
+Cell[1162, 33, 1654, 46, 115, "Input",ExpressionUUID->"0aaa62be-e8b9-42e7-b752-f0783ede879c"],
+Cell[2819, 81, 398, 8, 58, "Text",ExpressionUUID->"343b5439-7844-46e6-81f1-9ebcb127705a"],
+Cell[3220, 91, 1108, 30, 73, "Input",ExpressionUUID->"b33f4ae1-53e7-41e9-b169-f4decbdb97da"],
+Cell[4331, 123, 288, 6, 58, "Text",ExpressionUUID->"59c86cd8-f71b-461b-80f9-fdc804cc9727"],
+Cell[4622, 131, 1343, 35, 94, "Input",ExpressionUUID->"1ee081a3-8417-4e10-aa8e-8f2a9fd67f7c"],
+Cell[5968, 168, 212, 5, 35, "Text",ExpressionUUID->"0fa139dd-6e4a-42de-9426-d65329b98db1"],
+Cell[6183, 175, 890, 25, 115, "Input",ExpressionUUID->"cbd82af5-86dd-4b22-b812-deb33b4a2a6f"],
+Cell[7076, 202, 382, 8, 58, "Text",ExpressionUUID->"1ef09f64-f0d5-4e17-8053-888445623c43"],
+Cell[CellGroupData[{
+Cell[7483, 214, 1611, 42, 115, "Input",ExpressionUUID->"6dcb4d54-b970-473d-9106-8100f18c46e0"],
+Cell[9097, 258, 312, 4, 34, "Output",ExpressionUUID->"6c375add-5dc6-43cc-8370-0a22106c0642"],
+Cell[9412, 264, 331, 5, 34, "Output",ExpressionUUID->"65fe3689-aaa6-45da-97a6-f66640ae299a"],
+Cell[9746, 271, 310, 4, 34, "Output",ExpressionUUID->"9ddc4af9-ebbd-4837-8352-2a1319bf19bc"],
+Cell[10059, 277, 312, 4, 34, "Output",ExpressionUUID->"89987f86-2c2c-4a54-ace8-0e08319a2abc"],
+Cell[10374, 283, 328, 5, 34, "Output",ExpressionUUID->"311cb5ca-7c45-4186-9e2a-9146adbbd40c"]
+}, Open  ]],
+Cell[10717, 291, 492, 9, 81, "Text",ExpressionUUID->"1aecc06b-e3f1-4476-a2df-fb9832d01e6a"],
+Cell[CellGroupData[{
+Cell[11234, 304, 2106, 58, 136, "Input",ExpressionUUID->"e0b46379-eb2b-4bd6-9a00-4bd4d6cad67f"],
+Cell[13343, 364, 192, 2, 34, "Output",ExpressionUUID->"f7dad74b-0cc1-4d9e-a07e-8bc4a0a43c0f"],
+Cell[13538, 368, 192, 2, 34, "Output",ExpressionUUID->"2a277f4e-e0ab-4bc4-9ee9-e7323a56f51f"],
+Cell[13733, 372, 194, 2, 34, "Output",ExpressionUUID->"eeca4a81-508c-4a2a-b193-d49ac26738ec"],
+Cell[13930, 376, 192, 2, 34, "Output",ExpressionUUID->"91021856-b996-481c-8cb5-57485525ebb7"],
+Cell[14125, 380, 191, 2, 69, "Output",ExpressionUUID->"0bdd87be-7b1c-4a00-b3a4-fd10678829de"]
+}, Open  ]]
+}
+]
+*)
+
